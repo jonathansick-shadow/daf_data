@@ -4,10 +4,10 @@
  * This specifically loads definitions for LsstBase and DataProperty, which 
  * intern loads most of all the other LSST support classes.
  */
-#ifndef LSST_MWI_DATA_H
-#define LSST_MWI_DATA_H
-#include "lsst/mwi/data/LsstBase.h"
-#include "lsst/mwi/data/DataProperty.h"
-#include "lsst/mwi/data/SupportFactory.h"
-#include "lsst/mwi/data/LsstDataConfigurator.h"
+#ifndef LSST_DAF_DATA_H
+#define LSST_DAF_DATA_H
+#include "lsst/daf/data/LsstBase.h"
+#include "lsst/daf/data/DataProperty.h"
+#include "lsst/daf/data/SupportFactory.h"
+#include "lsst/daf/data/LsstDataConfigurator.h"
 #endif

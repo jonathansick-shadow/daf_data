@@ -1,9 +1,9 @@
 #include <iostream>
 #include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
-#include "lsst/mwi/data/Citizen.h"
-#include "lsst/mwi/data/LsstBase.h"
-#include "lsst/mwi/exceptions.h"
+#include "lsst/daf/data/Citizen.h"
+#include "lsst/daf/data/LsstBase.h"
+#include "lsst/pex/exceptions.h"
 
 //
 // We'll fully qualify LsstBase here in the class definitions;
@@ -11,7 +11,7 @@
 
 namespace rhl {
 
-class Shoe : private lsst::mwi::data::LsstBase {
+class Shoe : private lsst::daf::data::LsstBase {
 public:
     Shoe(int i = 0) : LsstBase(typeid(this)), _i(i) { }
     ~Shoe() { }
@@ -23,7 +23,7 @@ private:
 
 using namespace rhl;
 
-class MyClass : private lsst::mwi::data::LsstBase {
+class MyClass : private lsst::daf::data::LsstBase {
   public:
     MyClass(const char *typeName = 0) :
         LsstBase(typeid(this)),
@@ -35,7 +35,7 @@ private:
     boost::scoped_ptr<int> ptr;         // no need to track this alloc
 };
 
-using namespace lsst::mwi::data;
+using namespace lsst::daf::data;
 
 MyClass *foo() {
     boost::scoped_ptr<Shoe> x(new Shoe(1));
@@ -93,7 +93,7 @@ int main() {
     try {
         std::cerr << "Checking corruption\n";
         (void)Citizen::checkCorruption();
-    } catch(lsst::mwi::exceptions::Memory &e) {
+    } catch(lsst::pex::exceptions::Memory &e) {
         std::cerr << "Memory check: " << e.what() <<
             "; proceeding with trepidation\n";
         ((int *)y.get())[1] = 0xdeadbeef; // uncorrupt the block
