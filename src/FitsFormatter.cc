@@ -2,7 +2,7 @@
 /**
   * \file FitsFormatter.cc
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \author Jeff Bartels
   *
@@ -18,25 +18,27 @@
  */ 
 #include <boost/any.hpp>
 
-#include "lsst/mwi/data/FitsFormatter.h"
+#include <lsst/daf/base/DataProperty.h>
+#include <lsst/daf/data/FitsFormatter.h>
 
-#include "lsst/mwi/utils/Trace.h"
+#include <lsst/pex/logging/Trace.h>
 
 using namespace std;
 
 #define EXEC_TRACE  20
 static void execTrace( string s, int level = EXEC_TRACE ){
-    lsst::mwi::utils::Trace( "mwi.FitsFormatter", level, s );
+    lsst::pex::logging::Trace( "daf.data.FitsFormatter", level, s );
 }
 
+using lsst::daf::base::DataProperty;
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 
 const std::string FitsFormatter::formatDataProperty(
-                                    const DataProperty::PtrType prop, bool includeHead) {
+    const DataProperty::PtrType prop, bool includeHead) {
 
     std::ostringstream sout;
     
@@ -102,6 +104,6 @@ int FitsFormatter::countFITSHeaderCards( const DataProperty::PtrType prop, bool 
 }
 
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 

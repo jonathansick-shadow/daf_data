@@ -2,7 +2,7 @@
 /**
   * \class Provenance
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \brief A type of Metadata that captures the processing history 
   * of an LsstData realization.
@@ -26,14 +26,13 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "lsst/mwi/utils/Utils.h"
-#include "lsst/mwi/data/Citizen.h"
+#include "lsst/daf/base/Citizen.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
-class Provenance : public Citizen {
+class Provenance : public lsst::daf::base::Citizen {
 
 public:
     /// Default constructor
@@ -53,7 +52,7 @@ public:
 };
     
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 
 #endif // LSST_MWI_DATA_PROVENANCE_H

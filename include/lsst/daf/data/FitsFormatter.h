@@ -23,10 +23,10 @@
 
 #include <string>
 
-#include "lsst/mwi/data/DataProperty.h"
+#include "lsst/daf/base/DataProperty.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 
@@ -39,15 +39,20 @@ class FitsFormatter
 
 public:
     static const std::string formatDataProperty(
-                                const DataProperty::PtrType prop, bool includeHead=true);
-    static int countFITSHeaderCards( const DataProperty::PtrType prop, bool includeHead=true );
+        const lsst::daf::base::DataProperty::PtrType prop,
+        bool includeHead=true
+    );
+    static int countFITSHeaderCards(
+        const lsst::daf::base::DataProperty::PtrType prop,
+        bool includeHead=true
+    );
 private:
     FitsFormatter();
     ~FitsFormatter();
 };
 
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 
 #endif // LSST_FW_FITSFORMATTER_H

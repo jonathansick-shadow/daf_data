@@ -2,7 +2,7 @@
 /**
   * \class LsstData
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \brief LsstData is the pure abstract base type (interface) for all core 
   *        LSST data types
@@ -33,20 +33,16 @@
 #include <list>
 #include <string>
 
-#include "lsst/mwi/utils/Utils.h"
-
-#include "lsst/mwi/data/DataProperty.h"
-#include "lsst/mwi/persistence/Persistence.h"
-#include "lsst/mwi/policy/Policy.h"
-#include "lsst/mwi/data/Provenance.h"
-#include "lsst/mwi/data/ReleaseProcess.h"
-#include "lsst/mwi/data/Security.h"
+#include "lsst/daf/base/DataProperty.h"
+#include "lsst/daf/persistence/Persistence.h"
+#include "lsst/pex/policy/Policy.h"
+#include "lsst/daf/data/Provenance.h"
+#include "lsst/daf/data/ReleaseProcess.h"
+#include "lsst/daf/data/Security.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
-
-using lsst::mwi::policy::Policy;
 
 class LsstData {
 public:
@@ -83,38 +79,38 @@ public:
 
     /**
       * \brief   Accessor for object's Metadata
-      * \return  see lsst::mwi::data::DataProperty
+      * \return  see lsst::daf::data::DataProperty
       */
-    virtual DataProperty::PtrType getMetadata() const =0;
+    virtual lsst::daf::base::DataProperty::PtrType getMetadata() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's Persistence
-      *          see lsst::mwi::data::Persistence
+      *          see lsst::daf::data::Persistence
       * \return 
       */
-    virtual lsst::mwi::persistence::Persistence::Ptr getPersistence() const =0;
+    virtual lsst::daf::persistence::Persistence::Ptr getPersistence() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's Policy
-      * \return  see lsst::mwi::data::Policy
+      * \return  see lsst::daf::data::Policy
       */
-    virtual Policy::Ptr getPolicy() const =0;
+    virtual lsst::pex::policy::Policy::Ptr getPolicy() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's Provenance
-      * \return  see lsst::mwi::data::Provenance
+      * \return  see lsst::daf::data::Provenance
       */
     virtual Provenance::PtrType getProvenance() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's ReleaseProcess
-      * \return  see lsst::mwi::data::ReleaseProcess
+      * \return  see lsst::daf::data::ReleaseProcess
       */
     virtual ReleaseProcess::PtrType getReleaseProcess() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's Security
-      * \return  see lsst::mwi::data::Security
+      * \return  see lsst::daf::data::Security
       */
     virtual Security::PtrType getSecurity() const =0;
 
@@ -122,18 +118,18 @@ public:
     /**
       * \brief   Store the given Metadata object in an LsstData instance
       */
-    virtual void setMetadata(DataProperty::PtrType metadata) =0;
+    virtual void setMetadata(lsst::daf::base::DataProperty::PtrType metadata) =0;
 
     /**
       * \brief   Store the given Persistence object in an LsstData instance
       */
     virtual void setPersistence(
-                lsst::mwi::persistence::Persistence::Ptr persistence) =0;
+                lsst::daf::persistence::Persistence::Ptr persistence) =0;
 
     /**
       * \brief   Store the given Policy object in an LsstData instance
       */
-    virtual void setPolicy(Policy::Ptr policy) =0;
+    virtual void setPolicy(lsst::pex::policy::Policy::Ptr policy) =0;
 
     /**
       * \brief   Store the given Provenance object in an LsstData instance
@@ -157,7 +153,7 @@ public:
 };
     
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 
 #endif // LSST_MWI_DATA_LSSTDATA_H

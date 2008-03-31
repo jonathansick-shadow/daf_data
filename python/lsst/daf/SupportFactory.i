@@ -1,10 +1,10 @@
 %{
-#include "lsst/mwi/data/SupportFactory.h"
+#include "lsst/daf/data/SupportFactory.h"
 %}
 
-%include "lsst/mwi/data/SupportFactory.h"
+%include "lsst/daf/data/SupportFactory.h"
 
-%extend lsst::mwi::data::SupportFactory {
+%extend lsst::daf::data::SupportFactory {
     //
     // Workaround lack of boost::any support
     //

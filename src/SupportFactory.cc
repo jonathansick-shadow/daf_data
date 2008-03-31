@@ -13,18 +13,18 @@
 // Created: 03-Apr-2007 5:30:00 PM
 //////////////////////////////////////////////////////////////////////////////
 
-
-#include "lsst/mwi/data/SupportFactory.h"
-
-#include "lsst/mwi/utils/Utils.h"
-#include "lsst/mwi/utils/Trace.h"
-
 #include <string>
+
+#include "lsst/daf/base/DataProperty.h"
+#include "lsst/daf/data/SupportFactory.h"
+#include "lsst/pex/logging/Trace.h"
+
 using namespace std;
 
+using lsst::daf::base::DataProperty;
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 
@@ -33,7 +33,7 @@ SupportFactory* SupportFactory::_singleton = 0;
 
 #define EXEC_TRACE  20
 static void execTrace( string s, int level = EXEC_TRACE ){
-    lsst::mwi::utils::Trace( "mwi.data.SupportFactory", level, s );
+    lsst::pex::logging::Trace( "daf.data.SupportFactory", level, s );
 }
 
 
@@ -91,7 +91,4 @@ DataProperty::PtrType SupportFactory::createPropertyNode( std::string name ){
 }
 
 
-} // namespace data
-} // namespace mwi
-} // namespace lsst
-
+}}} // namespace lsst::daf::data

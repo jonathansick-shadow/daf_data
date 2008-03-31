@@ -14,8 +14,9 @@
 //////////////////////////////////////////////////////////////////////////////
 
 
-#include "lsst/mwi/data/Provenance.h"
-#include "lsst/mwi/utils/Trace.h"
+#include "lsst/daf/base/Citizen.h"
+#include "lsst/daf/data/Provenance.h"
+#include "lsst/pex/logging/Trace.h"
 
 #include <string>
 using namespace std;
@@ -23,16 +24,16 @@ using namespace std;
 
 #define EXEC_TRACE  20
 static void execTrace( string s, int level = EXEC_TRACE ){
-    lsst::mwi::utils::Trace( "mwi.data.Provenance", level, s );
+    lsst::pex::logging::Trace( "daf.data.Provenance", level, s );
 }
 
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 
-Provenance::Provenance() : Citizen( typeid(this) ){
+Provenance::Provenance() : lsst::daf::base::Citizen( typeid(this) ){
     execTrace("Enter Provenance::Provenance()");
     execTrace( boost::str( 
         boost::format( 
@@ -40,7 +41,7 @@ Provenance::Provenance() : Citizen( typeid(this) ){
 }
 
 
-Provenance::Provenance(const Provenance& from) : Citizen( typeid(this) ){
+Provenance::Provenance(const Provenance& from) : lsst::daf::base::Citizen( typeid(this) ){
    execTrace("Enter Provenance::Provenance(Provenance&)");
    execTrace("Exit Provenance::Provenance(Provenance&)");
 }
@@ -66,6 +67,6 @@ std::string Provenance::toString(){
 
 
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 

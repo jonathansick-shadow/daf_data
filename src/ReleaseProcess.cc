@@ -14,8 +14,9 @@
 //////////////////////////////////////////////////////////////////////////////
 
 
-#include "lsst/mwi/data/ReleaseProcess.h"
-#include "lsst/mwi/utils/Trace.h"
+#include "lsst/daf/base/Citizen.h"
+#include "lsst/daf/data/ReleaseProcess.h"
+#include "lsst/pex/logging/Trace.h"
 
 #include <string>
 using namespace std;
@@ -23,15 +24,15 @@ using namespace std;
 
 #define EXEC_TRACE  20
 static void execTrace( string s, int level = EXEC_TRACE ){
-    lsst::mwi::utils::Trace( "mwi.data.ReleaseProcess", level, s );
+    lsst::pex::logging::Trace( "daf.data.ReleaseProcess", level, s );
 }
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 
-ReleaseProcess::ReleaseProcess() : Citizen( typeid(this) ){
+ReleaseProcess::ReleaseProcess() : lsst::daf::base::Citizen( typeid(this) ){
     execTrace("Enter ReleaseProcess::ReleaseProcess()");
     execTrace( boost::str( 
         boost::format( 
@@ -39,7 +40,7 @@ ReleaseProcess::ReleaseProcess() : Citizen( typeid(this) ){
 }
 
 
-ReleaseProcess::ReleaseProcess(const ReleaseProcess& from) : Citizen( typeid(this) ){
+ReleaseProcess::ReleaseProcess(const ReleaseProcess& from) : lsst::daf::base::Citizen( typeid(this) ){
     execTrace("Enter ReleaseProcess::ReleaseProcess(ReleaseProcess&)");
     execTrace("Exit ReleaseProcess::ReleaseProcess(ReleaseProcess&)");
 }
@@ -65,6 +66,6 @@ std::string ReleaseProcess::toString(){
 
 
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 

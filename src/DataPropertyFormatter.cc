@@ -10,7 +10,7 @@
  *
  * Contact: Kian-Tat Lim (ktl@slac.stanford.edu)
  *
- * \ingroup mwi
+ * \ingroup daf
  */
 
 #ifndef __GNUC__
@@ -18,46 +18,48 @@
 #endif
 static char const* SVNid __attribute__((unused)) = "$Id$";
 
-#include "lsst/mwi/data/DataPropertyFormatter.h"
-
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-
-#include <boost/serialization/list.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
-#include "lsst/mwi/data/DataProperty.h"
-#include "lsst/mwi/exceptions.h"
-#include "lsst/mwi/persistence/FormatterImpl.h"
-#include "lsst/mwi/persistence/LogicalLocation.h"
-#include "lsst/mwi/persistence/BoostStorage.h"
-#include "lsst/mwi/persistence/DateTime.h"
-#include "lsst/mwi/persistence/DbStorage.h"
-#include "lsst/mwi/persistence/XmlStorage.h"
-#include "lsst/mwi/utils/Trace.h"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/serialization/list.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+
+#include "lsst/daf/base/DataProperty.h"
+#include "lsst/daf/base/DateTime.h"
+#include "lsst/daf/persistence/FormatterImpl.h"
+#include "lsst/daf/persistence/LogicalLocation.h"
+#include "lsst/daf/persistence/BoostStorage.h"
+#include "lsst/daf/persistence/DbStorage.h"
+#include "lsst/daf/persistence/XmlStorage.h"
+#include <lsst/pex/exceptions.h>
+#include <lsst/pex/logging/Trace.h>
+#include <lsst/pex/policy/Policy.h>
+
+#include "lsst/daf/base/DataPropertyFormatter.h"
 
 #define EXEC_TRACE  20
 static void execTrace(std::string s, int level = EXEC_TRACE) {
-    lsst::mwi::utils::Trace("mwi.data.DataPropertyFormatter", level, s);
+    lsst::pex::logging::Trace("daf.data.DataPropertyFormatter", level, s);
 }
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 using boost::serialization::make_nvp;
+using lsst::daf::base::DataProperty;
 
 /** Register this Formatter subclass through a static instance of
  * FormatterRegistration.
  */
-lsst::mwi::persistence::FormatterRegistration
+lsst::daf::persistence::FormatterRegistration
     DataPropertyFormatter::registration("DataProperty", typeid(DataProperty),
                                         createInstance);
 
@@ -65,7 +67,7 @@ lsst::mwi::persistence::FormatterRegistration
  * \param[in] policy Policy for configuring this Formatter
  */
 DataPropertyFormatter::DataPropertyFormatter(
-    lsst::mwi::policy::Policy::Ptr policy) :
+    lsst::pex::policy::Policy::Ptr policy) :
     Formatter(typeid(*this)), _policy(policy) {
 }
 
@@ -77,12 +79,10 @@ DataPropertyFormatter::~DataPropertyFormatter(void) {
 void DataPropertyFormatter::write(Persistable const* persistable,
                                   Storage::Ptr storage,
                                   DataProperty::PtrType additionalData) {
-    using namespace lsst::mwi::policy;
-
     execTrace("DataPropertyFormatter write start");
     DataProperty const* dp = dynamic_cast<DataProperty const*>(persistable);
     if (dp == 0) {
-        throw lsst::mwi::exceptions::Runtime("Persisting non-DataProperty");
+        throw lsst::pex::exceptions::Runtime("Persisting non-DataProperty");
     }
     if (typeid(*storage) == typeid(BoostStorage)) {
         execTrace("DataPropertyFormatter write BoostStorage");
@@ -105,7 +105,7 @@ void DataPropertyFormatter::write(Persistable const* persistable,
         std::string itemName = boost::any_cast<std::string>(
             additionalData->findUnique("itemName")->getValue());
         std::string tableName = itemName;
-        Policy::Ptr itemPolicy;
+        lsst::pex::policy::Policy::Ptr itemPolicy;
         if (_policy && _policy->exists(itemName)) {
             itemPolicy = _policy->getPolicy(itemName);
             if (itemPolicy->exists("TableName")) {
@@ -116,9 +116,9 @@ void DataPropertyFormatter::write(Persistable const* persistable,
 
         std::vector<std::string> list;
         if (itemPolicy && itemPolicy->exists("KeyList")) {
-            Policy::StringPtrArray const& array(
+            lsst::pex::policy::Policy::StringPtrArray const& array(
                 itemPolicy->getStringArray("KeyList"));
-            for (Policy::StringPtrArray::const_iterator it = array.begin();
+            for (lsst::pex::policy::Policy::StringPtrArray::const_iterator it = array.begin();
                  it != array.end(); ++it) {
                 list.push_back(**it);
             }
@@ -174,13 +174,13 @@ void DataPropertyFormatter::write(Persistable const* persistable,
                 db->setColumn<std::string>(
                     colName, boost::any_cast<std::string>(value));
             }
-            else if (type == typeid(lsst::mwi::persistence::DateTime)) {
-                db->setColumn<lsst::mwi::persistence::DateTime>(
+            else if (type == typeid(lsst::daf::base::DateTime)) {
+                db->setColumn<lsst::daf::base::DateTime>(
                     colName,
-                    boost::any_cast<lsst::mwi::persistence::DateTime>(value));
+                    boost::any_cast<lsst::daf::base::DateTime>(value));
             }
             else {
-                throw lsst::mwi::exceptions::Runtime(
+                throw lsst::pex::exceptions::Runtime(
                     std::string("Unknown type ") + type.name() +
                     " in DataPropertyFormatter write");
             }
@@ -190,7 +190,7 @@ void DataPropertyFormatter::write(Persistable const* persistable,
         return;
     }
 
-    throw lsst::mwi::exceptions::Runtime("Unrecognized Storage for DataProperty");
+    throw lsst::pex::exceptions::Runtime("Unrecognized Storage for DataProperty");
 }
 
 Persistable* DataPropertyFormatter::read(
@@ -211,13 +211,13 @@ Persistable* DataPropertyFormatter::read(
         execTrace("DataPropertyFormatter read end");
         return dp;
     }
-    throw lsst::mwi::exceptions::Runtime("Unrecognized Storage for DataProperty");
+    throw lsst::pex::exceptions::Runtime("Unrecognized Storage for DataProperty");
 }
 
 void DataPropertyFormatter::update(Persistable* persistable,
                                    Storage::Ptr storage,
                                    DataProperty::PtrType additionalData) {
-    throw lsst::mwi::exceptions::Runtime("Unexpected call to update for DataProperty");
+    throw lsst::pex::exceptions::Runtime("Unexpected call to update for DataProperty");
 }
 
 /** Serialize a DataProperty value.
@@ -249,7 +249,7 @@ void DataPropertyFormatter::delegateSerialize(
     execTrace("DataPropertyFormatter delegateSerialize start");
     DataProperty* dp = dynamic_cast<DataProperty*>(persistable);
     if (dp == 0) {
-        throw lsst::mwi::exceptions::Runtime("Serializing non-DataProperty");
+        throw lsst::pex::exceptions::Runtime("Serializing non-DataProperty");
     }
     ar & make_nvp("base", boost::serialization::base_object<Persistable>(*dp));
     ar & make_nvp("name", dp->_name) & make_nvp("isANode", dp->_isANode);
@@ -268,7 +268,7 @@ void DataPropertyFormatter::delegateSerialize(
             else if (id == typeid(std::string)) type = 's';
             else if (id == typeid(Persistable::Ptr)) type = 'p';
             else {
-                throw lsst::mwi::exceptions::Runtime(
+                throw lsst::pex::exceptions::Runtime(
                     std::string("Unknown type in DataProperty boost::any") +
                     id.name());
             }
@@ -283,7 +283,7 @@ void DataPropertyFormatter::delegateSerialize(
         case 's': serializeItem<Archive, std::string>(ar, dp->_value); break;
         case 'p': serializeItem<Archive, Persistable::Ptr>(ar, dp->_value); break;
         default:
-                  throw lsst::mwi::exceptions::Runtime(
+                  throw lsst::pex::exceptions::Runtime(
                       std::string("Unknown type reading DataProperty") + type);
         }
         execTrace("DataPropertyFormatter processed " + type);
@@ -296,8 +296,8 @@ void DataPropertyFormatter::delegateSerialize(
  * \return Shared pointer to a new instance
  */
 Formatter::Ptr DataPropertyFormatter::createInstance(
-    lsst::mwi::policy::Policy::Ptr policy) {
+    lsst::pex::policy::Policy::Ptr policy) {
     return Formatter::Ptr(new DataPropertyFormatter(policy));
 }
 
-}}} // namespace lsst::mwi::data
+}}} // namespace lsst::daf::data

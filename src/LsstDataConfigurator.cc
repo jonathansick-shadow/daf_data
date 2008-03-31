@@ -13,23 +13,21 @@
 // Created: 03-Apr-2007 5:30:00 PM
 //////////////////////////////////////////////////////////////////////////////
 
-
-#include "lsst/mwi/data/LsstDataConfigurator.h"
-#include "lsst/mwi/utils/Trace.h"
-#include "lsst/mwi/utils/Utils.h"
-
 #include <string>
+
+#include "lsst/daf/data/LsstDataConfigurator.h"
+#include "lsst/pex/logging/Trace.h"
+#include <lsst/pex/policy/Policy.h>
+
 using namespace std;
 
-
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
-
 
 #define EXEC_TRACE  20
 static void execTrace( string s ){
-    lsst::mwi::utils::Trace( "mwi.data.LsstDataConfigurator", EXEC_TRACE, s );
+    lsst::pex::logging::Trace( "daf.data.LsstDataConfigurator", EXEC_TRACE, s );
 }
 
 
@@ -66,7 +64,10 @@ LsstDataConfigurator::LsstDataConfigurator& LsstDataConfigurator::operator= (con
 }
 
 
-void LsstDataConfigurator::configureSupport( LsstData::PtrType data, Policy::Ptr policy){
+void LsstDataConfigurator::configureSupport(
+    LsstData::PtrType data,
+    lsst::pex::policy::Policy::Ptr policy
+){
     execTrace( 
         boost::str( 
             boost::format( "LsstDataConfigurator::configureSupport(%s, %s)")
@@ -74,8 +75,5 @@ void LsstDataConfigurator::configureSupport( LsstData::PtrType data, Policy::Ptr
     return;
 }
 
-
-} // namespace data
-} // namespace mwi
-} // namespace lsst
+}}} // namespace lsst::daf::data
 

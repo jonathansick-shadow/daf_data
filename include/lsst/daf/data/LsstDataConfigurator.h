@@ -2,7 +2,7 @@
 /**
   * \class   LsstDataConfigurator
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \brief   Configure the content of LsstData objects
   *
@@ -12,7 +12,7 @@
   * callable constructors nor can it be used in an assignment statement. It 
   * cannot be used to derive another class. (It is 'final' or 'sealed').
   *
-  * Usage assuming using namespace lsst::mwi::data:
+  * Usage assuming using namespace lsst::daf::data:
   *       LsstDataConfigurator::method(...);
   * 
   * 
@@ -33,16 +33,12 @@
 #ifndef LSST_MWI_DATA_LSSTDATACONFIGURATOR_H
 #define LSST_MWI_DATA_LSSTDATACONFIGURATOR_H
 
-#include "lsst/mwi/utils/Utils.h"
-
-#include "lsst/mwi/policy/Policy.h"
-#include "lsst/mwi/data/LsstData.h"
+#include "lsst/pex/policy/Policy.h"
+#include "lsst/daf/data/LsstData.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
-
-using lsst::mwi::policy::Policy;
 
 class LsstDataConfigurator {
 public:
@@ -53,7 +49,10 @@ public:
       * \param   data The LsstData object to initialize 
       * \param   policy The controlling policy object
       */
-    static void configureSupport( LsstData::PtrType data, Policy::Ptr policy);
+    static void configureSupport(
+        LsstData::PtrType data,
+        lsst::pex::policy::Policy::Ptr policy
+    );
 private:
     // All constructors/destructor, copy constructors, assignment operators
     // are private to preclude specialization and explicit creation
@@ -70,7 +69,7 @@ private:
 
 
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 
 #endif // LSST_MWI_DATA_LSSTDATACONFIGURATOR_H

@@ -2,7 +2,7 @@
 /**
   * \class Security
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \brief Implements the logic that enforces the access and authorization 
   *  rules that apply to an LsstData Realization.
@@ -27,14 +27,13 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "lsst/mwi/utils/Utils.h"
-#include "lsst/mwi/data/Citizen.h"
+#include "lsst/daf/base/Citizen.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
-class Security : public Citizen {
+class Security : public lsst::daf::base::Citizen {
 public:
     /// Default constructor
     Security();
@@ -53,7 +52,7 @@ public:
 };
     
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 
 #endif // LSST_MWI_DATA_SECURITY_H

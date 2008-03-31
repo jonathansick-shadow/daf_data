@@ -1,7 +1,7 @@
 /**
   * \class ReleaseProcess
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \brief Implements the logic needed to prepare an LsstData 
   *  realization for release and then bring it to a released state.
@@ -25,14 +25,13 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "lsst/mwi/utils/Utils.h"
-#include "lsst/mwi/data/Citizen.h"
+#include "lsst/daf/base/Citizen.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
-class ReleaseProcess : public Citizen {
+class ReleaseProcess : public lsst::daf::base::Citizen {
 public:
     /// Default constructor
     ReleaseProcess();
@@ -51,7 +50,7 @@ public:
 };
     
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 
 #endif // LSST_MWI_DATA_RELEASEPROCESS_H

@@ -1,7 +1,7 @@
 // -*- lsst-c++ -*-
 //////////////////////////////////////////////////////////////////////////////
 // lsstdata01.cc
-//      mwi classes sanity check program (see comments below)
+//      lsst::daf::data classes sanity check program (see comments below)
 //
 // $Author::                                                                 $
 // $Rev::                                                                    $
@@ -103,19 +103,20 @@
 //  No leaks detected
 //
  
-
-#include "lsst/mwi/utils/Trace.h"
-#include "lsst/mwi/data/LsstBase.h"
-#include "lsst/mwi/data/SupportFactory.h"
-#include "lsst/mwi/data/LsstDataConfigurator.h"
-
 #include <iostream>
 #include <string>
 #include <boost/format.hpp>
 
+#include <lsst/daf/base/Citizen.h>
+#include "lsst/daf/data/LsstBase.h"
+#include "lsst/daf/data/SupportFactory.h"
+#include "lsst/daf/data/LsstDataConfigurator.h"
+#include "lsst/pex/logging/Trace.h"
+#include <lsst/pex/policy/Policy.h>
+
 using namespace std;
-using namespace lsst::mwi::data;
-using lsst::mwi::utils::Trace;
+using namespace lsst::daf::data;
+using lsst::pex::logging::Trace;
 
 class MyLsst : public LsstBase
 {
@@ -157,7 +158,8 @@ int main( int argc, char** argv )
         //    configuration.
         //
         Trace( "lsstdata01",1, "Explicitly creating a policy object");
-        Policy::Ptr sp = Policy::Ptr( new Policy() );
+        lsst::pex::policy::Policy::Ptr sp = lsst::pex::policy::Policy::Ptr(
+            new lsst::pex::policy::Policy());
         Trace( "lsstdata01",1, 
             boost::format("Created policy object '%s'") % sp.get()->toString());
          
@@ -209,11 +211,11 @@ int main( int argc, char** argv )
     //
     // Check for memory leaks
     //
-    if (Citizen::census(0) == 0) {
+    if (lsst::daf::base::Citizen::census(0) == 0) {
         Trace( "lsstdata01",1, "No leaks detected");
     } else {
         Trace( "lsstdata01",1, "ERROR: Memory leaks detected!");
-        Citizen::census(cerr);
+        lsst::daf::base::Citizen::census(cerr);
     }
 
     return 0;

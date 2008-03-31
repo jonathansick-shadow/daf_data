@@ -14,8 +14,9 @@
 //////////////////////////////////////////////////////////////////////////////
 
 
-#include "lsst/mwi/data/Security.h"
-#include "lsst/mwi/utils/Trace.h"
+#include "lsst/daf/base/Citizen.h"
+#include "lsst/daf/data/Security.h"
+#include "lsst/pex/logging/Trace.h"
 
 #include <string>
 using namespace std;
@@ -23,16 +24,16 @@ using namespace std;
 
 #define EXEC_TRACE  20
 static void execTrace( string s, int level = EXEC_TRACE ){
-    lsst::mwi::utils::Trace( "mwi.data.ReleaseProcess", level, s );
+    lsst::pex::logging::Trace( "daf.data.ReleaseProcess", level, s );
 }
 
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 
-Security::Security() : Citizen( typeid(this) ){
+Security::Security() : lsst::daf::base::Citizen( typeid(this) ){
     execTrace("Enter Security::Security()");
     execTrace( boost::str( 
         boost::format( 
@@ -40,7 +41,7 @@ Security::Security() : Citizen( typeid(this) ){
 }
 
 
-Security::Security(const Security& from) : Citizen( typeid(this) ){
+Security::Security(const Security& from) : lsst::daf::base::Citizen( typeid(this) ){
     execTrace("Enter Security::Security(Security&)");
     execTrace("Exit Security::Security(Security&)");
 }
@@ -66,6 +67,6 @@ std::string Security::toString(){
 
 
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 

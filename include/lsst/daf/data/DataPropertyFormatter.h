@@ -10,16 +10,20 @@
  * \date $Date$
  *
  * Contact: Kian-Tat Lim (ktl@slac.stanford.edu)
- * \ingroup mwi
+ * \ingroup daf
  */
 
-/** \class lsst::mwi::data::DataPropertyFormatter
+/** \class lsst::daf::data::DataPropertyFormatter
  * \brief Formatter for persistence of DataProperty instances.
  *
- * \ingroup mwi
+ * \ingroup daf
  */
 
-#include "lsst/mwi/persistence/Formatter.h"
+#include <lsst/daf/base/DataProperty.h>
+#include <lsst/daf/base/Persistable.h>
+#include <lsst/daf/persistence/Formatter.h>
+#include <lsst/daf/persistence/Storage.h>
+#include <lsst/pex/policy/Policy.h>
 
 // Forward declarations of Boost archive types
 namespace boost {
@@ -29,42 +33,48 @@ namespace archive {
 }} // namespace boost::archive;
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
-using namespace lsst::mwi::persistence;
-
-class DataPropertyFormatter : public Formatter {
+class DataPropertyFormatter : public lsst::daf::persistence::Formatter {
 public:
     virtual ~DataPropertyFormatter(void);
 
-    virtual void write(Persistable const* persistable,
-                       Storage::Ptr storage,
-                       DataProperty::PtrType additionalData);
+    virtual void write(
+        lsst::daf::base::Persistable const* persistable,
+        lsst::daf::persistence::Storage::Ptr storage,
+        lsst::daf::base::DataProperty::PtrType additionalData
+    );
 
-    virtual Persistable* read(Storage::Ptr storage,
-                                  DataProperty::PtrType additionalData);
+    virtual lsst::daf::base::Persistable* read(
+        lsst::daf::persistence::Storage::Ptr storage,
+        lsst::daf::base::DataProperty::PtrType additionalData
+    );
 
-    virtual void update(Persistable* persistable,
-                        Storage::Ptr storage,
-                        DataProperty::PtrType additionalData);
+    virtual void update(
+        lsst::daf::base::Persistable* persistable,
+        lsst::daf::persistence::Storage::Ptr storage,
+        lsst::daf::base::DataProperty::PtrType additionalData
+    );
 
     template <class Archive>
-    static void delegateSerialize(Archive& ar,
-                                  unsigned int const version,
-                                  Persistable* persistable);
+    static void delegateSerialize(
+        Archive& ar,
+        unsigned int const version,
+        lsst::daf::base::Persistable* persistable
+    );
 
 private:
-    DataPropertyFormatter(lsst::mwi::policy::Policy::Ptr policy);
+    DataPropertyFormatter(lsst::pex::policy::Policy::Ptr policy);
 
-    lsst::mwi::policy::Policy::Ptr _policy;
+    lsst::pex::policy::Policy::Ptr _policy;
 
-    static Formatter::Ptr createInstance(
-        lsst::mwi::policy::Policy::Ptr policy);
+    static lsst::daf::persistence::Formatter::Ptr createInstance(
+        lsst::pex::policy::Policy::Ptr policy);
 
-    static FormatterRegistration registration;
+    static lsst::daf::persistence::FormatterRegistration registration;
 };
 
-}}} // namespace lsst::mwi::data
+}}} // namespace lsst::daf::data
 
 #endif

@@ -13,34 +13,38 @@
 // Created: 03-Apr-2007 5:30:00 PM
 //////////////////////////////////////////////////////////////////////////////
 
-
-#include "lsst/mwi/data/LsstImpl_DC2.h"
-#include "lsst/mwi/data/SupportFactory.h"
-#include "lsst/mwi/utils/Trace.h"
-
 #include <string>
 #include <iostream>
+
+#include "lsst/daf/base/Citizen.h"
+#include "lsst/daf/base/DataProperty.h"
+#include "lsst/daf/data/LsstImpl_DC2.h"
+#include "lsst/daf/data/SupportFactory.h"
+#include "lsst/pex/logging/Trace.h"
+#include <lsst/pex/policy/Policy.h>
+
 using namespace std;
 
 
 #define EXEC_TRACE  20
 static void execTrace( string s, int level = EXEC_TRACE ){
-    lsst::mwi::utils::Trace( "mwi.data.LsstImpl", level, s );
+    lsst::pex::logging::Trace( "daf.data.LsstImpl", level, s );
 }
 
+using lsst::daf::base::DataProperty;
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 
-LsstImpl_DC2::LsstImpl_DC2(const std::type_info & type) : Citizen(type){
+LsstImpl_DC2::LsstImpl_DC2(const std::type_info & type) : lsst::daf::base::Citizen(type){
     execTrace( boost::str( 
         boost::format(
             "Enter LsstImpl_DC2::LsstImpl_DC2(%s)") % type.name()));
     _metadata = DataProperty::PtrType();
-    _persistence = lsst::mwi::persistence::Persistence::Ptr();
-    _policy = Policy::Ptr();
+    _persistence = lsst::daf::persistence::Persistence::Ptr();
+    _policy = lsst::pex::policy::Policy::Ptr();
     _provenance = Provenance::PtrType();
     _releaseProcess = ReleaseProcess::PtrType();
     _security = Security::PtrType();
@@ -75,14 +79,14 @@ DataProperty::PtrType LsstImpl_DC2::getMetadata() const{
 }
 
 
-lsst::mwi::persistence::Persistence::Ptr LsstImpl_DC2::getPersistence() const{
+lsst::daf::persistence::Persistence::Ptr LsstImpl_DC2::getPersistence() const{
     execTrace( "Enter LsstImpl_DC2::getPersistence()" );
     execTrace( "Exit LsstImpl_DC2::getPersistence()" );
 	return _persistence;
 }
 
 
-Policy::Ptr LsstImpl_DC2::getPolicy() const{
+lsst::pex::policy::Policy::Ptr LsstImpl_DC2::getPolicy() const{
     execTrace( "Enter LsstImpl_DC2::getPolicy()" );
     execTrace( "Exit LsstImpl_DC2::getPolicy()" );
 	return _policy;
@@ -118,14 +122,14 @@ void LsstImpl_DC2::setMetadata(DataProperty::PtrType metadata) {
 
 
 void LsstImpl_DC2::setPersistence(
-            lsst::mwi::persistence::Persistence::Ptr persistence) {
+            lsst::daf::persistence::Persistence::Ptr persistence) {
     execTrace( "Enter LsstImpl_DC2::setPersistence()" );
     execTrace( "Exit LsstImpl_DC2::setPersistence()" );
 	_persistence = persistence;
 }
 
 
-void LsstImpl_DC2::setPolicy(Policy::Ptr policy) {
+void LsstImpl_DC2::setPolicy(lsst::pex::policy::Policy::Ptr policy) {
     execTrace( "Enter LsstImpl_DC2::setPolicy()" );
     execTrace( "Exit LsstImpl_DC2::setPolicy()" );
 	_policy = policy;
@@ -158,7 +162,5 @@ std::string LsstImpl_DC2::toString(){
 }
 
 
-} // namespace data
-} // namespace mwi
-} // namespace lsst
+}}} // namespace lsst::daf::data
 

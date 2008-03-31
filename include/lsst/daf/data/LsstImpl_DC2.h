@@ -2,7 +2,7 @@
 /**
   * \class LsstImpl_DC2
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \brief The implementation of LsstImpl for DC2.
   *        
@@ -30,29 +30,28 @@
 
 #include <typeinfo>
 
-#include "lsst/mwi/data/LsstData.h"
-#include "lsst/mwi/data/Citizen.h"
-#include "lsst/mwi/policy/Policy.h"
+#include "lsst/daf/base/Citizen.h"
+#include "lsst/daf/data/LsstData.h"
+#include "lsst/pex/policy/Policy.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
-using lsst::mwi::policy::Policy;
-
-class LsstImpl_DC2 : public LsstData, public Citizen {
+class LsstImpl_DC2 : public LsstData, public lsst::daf::base::Citizen {
 public:
     LsstImpl_DC2(const std::type_info & type);
     /// Virtual destructor, class may be specialized (see Stroustrup 12.4.2)
     virtual ~LsstImpl_DC2();
 
     /**
-      * \brief   Base implementation lsst:DataProperty:::mwi::data:getChildren. May be overridden.
+      * \brief   Base implementation lsst::daf::base::DataProperty::daf::data:getChildren. 
+      *          May be overridden.
       *          Classes deriving from LsstImpl need implement a getChildren
       *          method only if they collect children.
       * \param   depth Specifies how deep to recurse the collection of
       *                children objects when creating the returned collection.
-      *                see lsst::mwi::data::LsstData.getChildren
+      *                see lsst::daf::data::LsstData.getChildren
       * \return  ContainerType Will always return a pair of iterators giving a NULL range
       *          (i.e. std::distance( first, last) = 0)  
       */
@@ -60,89 +59,89 @@ public:
 
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::LsstData.getMetadata().
+      * \brief   Base implementation of lsst::daf::data::LsstData.getMetadata().
       *          May be overridden. Base implementation returns a 
       *          reference-counted pointer to the base object's cached 
       *          instance of Metadata.
-      * \return  see lsst::mwi::data::DataProperty
+      * \return  see lsst::daf::data::DataProperty
       */
-    virtual DataProperty::PtrType getMetadata() const;
+    virtual lsst::daf::base::DataProperty::PtrType getMetadata() const;
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::LsstData.getPersistence().
+      * \brief   Base implementation of lsst::daf::data::LsstData.getPersistence().
       *          May be overridden. Base implementation returns a 
       *          reference-counted pointer to the base object's cached 
       *          instance of Persistence.
-      * \return  see lsst::mwi::persistence::Persistence
+      * \return  see lsst::daf::persistence::Persistence
       */
-    virtual lsst::mwi::persistence::Persistence::Ptr getPersistence() const;
+    virtual lsst::daf::persistence::Persistence::Ptr getPersistence() const;
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::LsstData.getPolicy().
+      * \brief   Base implementation of lsst::daf::data::LsstData.getPolicy().
       *          May be overridden. Base implementation returns a 
       *          reference-counted pointer to the base object's cached 
       *          instance of Policy.
-      * \return  see lsst::mwi::data::Policy
+      * \return  see lsst::pex::policy::Policy
       */
-    virtual Policy::Ptr getPolicy() const;
+    virtual lsst::pex::policy::Policy::Ptr getPolicy() const;
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::LsstData.getProvenance().
+      * \brief   Base implementation of lsst::daf::data::LsstData.getProvenance().
       *          May be overridden. Base implementation returns a 
       *          reference-counted pointer to the base object's cached 
       *          instance of Provenance.
-      * \return  see lsst::mwi::data::Provenance
+      * \return  see lsst::daf::data::Provenance
       */
     virtual Provenance::PtrType getProvenance() const;
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::LsstData.getReleaseProcess().
+      * \brief   Base implementation of lsst::daf::data::LsstData.getReleaseProcess().
       *          May be overridden. Base implementation returns a 
       *          reference-counted pointer to the base object's cached 
       *          instance of ReleaseProcess.
-      * \return  see lsst::mwi::data::ReleaseProcess
+      * \return  see lsst::daf::data::ReleaseProcess
       */
     virtual ReleaseProcess::PtrType getReleaseProcess() const;
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::LsstData.getSecurity().
+      * \brief   Base implementation of lsst::daf::data::LsstData.getSecurity().
       *          May be overridden. Base implementation returns a 
       *          reference-counted pointer to the base object's cached 
       *          instance of Security.
-      * \return  see lsst::mwi::data::Security
+      * \return  see lsst::daf::data::Security
       */
     virtual Security::PtrType getSecurity() const;
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::setMetadata(). 
+      * \brief   Base implementation of lsst::daf::data::setMetadata(). 
       *          May be overridden. Assigns the given metadata
       *          object to the base object's private data member. May result in
       *          the destruction of the currently-cached member object since
       *          the data member is a reference-counted pointer.
       */
-    virtual void setMetadata(DataProperty::PtrType metadata);
+    virtual void setMetadata(lsst::daf::base::DataProperty::PtrType metadata);
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::setPersistence(). 
+      * \brief   Base implementation of lsst::daf::data::setPersistence(). 
       *          May be overridden. Assigns the given Persistence
       *          object to the base object's private data member. May result in
       *          the destruction of the currently-cached member object since
       *          the data member is a reference-counted pointer.
       */
     virtual void setPersistence(
-                lsst::mwi::persistence::Persistence::Ptr persistence);
+                lsst::daf::persistence::Persistence::Ptr persistence);
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::setPolicy(). 
+      * \brief   Base implementation of lsst::daf::data::setPolicy(). 
       *          May be overridden. Assigns the given Policy
       *          object to the base object's private data member. May result in
       *          the destruction of the currently-cached member object since
       *          the data member is a reference-counted pointer.
       */
-    virtual void setPolicy(Policy::Ptr policy);
+    virtual void setPolicy(lsst::pex::policy::Policy::Ptr policy);
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::setProvenance(). 
+      * \brief   Base implementation of lsst::daf::data::setProvenance(). 
       *          May be overridden. Assigns the given Provenance
       *          object to the base object's private data member. May result in
       *          the destruction of the currently-cached member object since
@@ -151,7 +150,7 @@ public:
     virtual void setProvenance(Provenance::PtrType provenance);
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::setReleaseProcess(). 
+      * \brief   Base implementation of lsst::daf::data::setReleaseProcess(). 
       *          May be overridden. Assigns the given ReleaseProcess
       *          object to the base object's private data member. May result in
       *          the destruction of the currently-cached member object since
@@ -160,7 +159,7 @@ public:
     virtual void setReleaseProcess(ReleaseProcess::PtrType release);
 
     /**
-      * \brief   Base implementation of lsst::mwi::data::setSecurity(). 
+      * \brief   Base implementation of lsst::daf::data::setSecurity(). 
       *          May be overridden. Assigns the given Security
       *          object to the base object's private data member. May result in
       *          the destruction of the currently-cached member object since
@@ -169,16 +168,16 @@ public:
     virtual void setSecurity(Security::PtrType security);
  
     /**
-      * \brief   Base implementation of lsst::mwi::data::toString(). 
+      * \brief   Base implementation of lsst::daf::data::toString(). 
       *          May be overridden. Returns a short string representation
       *          of the object as implemented by Citizen::repr().
       */
     virtual std::string toString();
 
 private:
-    DataProperty::PtrType _metadata;
-    lsst::mwi::persistence::Persistence::Ptr _persistence;
-    Policy::Ptr _policy;
+    lsst::daf::base::DataProperty::PtrType _metadata;
+    lsst::daf::persistence::Persistence::Ptr _persistence;
+    lsst::pex::policy::Policy::Ptr _policy;
     Provenance::PtrType _provenance;
     ReleaseProcess::PtrType _releaseProcess;
     Security::PtrType _security;
@@ -187,7 +186,7 @@ private:
 };
 
 } // namespace data
-} // namespace mwi
+} // namespace daf
 } // namespace lsst
 
 #endif // LSST_MWI_DATA_LSSTIMPL_DC2_H

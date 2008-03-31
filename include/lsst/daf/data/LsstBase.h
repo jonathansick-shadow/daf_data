@@ -2,7 +2,7 @@
 /*
   * \class LsstBase
   *
-  * \ingroup mwi
+  * \ingroup daf
   *
   * \brief Base class implementation for all LsstData derived types
   *
@@ -24,14 +24,13 @@
   * 
   */
 
-#ifndef LSST_MWI_DATA_LSSTBASE_H            //! multiple inclusion guard macro
+#ifndef LSST_MWI_DATA_LSSTBASE_H
 #define LSST_MWI_DATA_LSSTBASE_H
 
-#include "lsst/mwi/data/LsstImpl_DC2.h"
-#include "lsst/mwi/utils/Utils.h"
+#include "lsst/daf/data/LsstImpl_DC2.h"
 
 namespace lsst {
-namespace mwi {
+namespace daf {
 namespace data {
 
 class LsstBase : public LsstImpl_DC2 {
@@ -48,9 +47,7 @@ public:
     virtual ~LsstBase() {};
 };
     
-} // namespace data
-} // namespace mwi
-} // namespace lsst
+}}} // namespace lsst::daf::data
 
 #endif  // LSST_MWI_DATA_LSSTBASE_H
 
