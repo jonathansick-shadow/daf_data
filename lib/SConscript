@@ -2,11 +2,10 @@
 Import('env')
 import os
 
+basicLibs = "daf_base daf_data pex_exceptions pex_logging pex_policy".split()
 env.SharedLibrary('daf_data',
                          map(lambda str: "../src/data/" + str,
-                            ["Citizen.cc",
-                             "DataProperty.cc",
-                             "DataPropertyFormatter.cc",
+                            ["DataPropertyFormatter.cc",
                              "FitsFormatter.cc",
                              "LsstDataConfigurator.cc",
                              "LsstImpl_DC2.cc",
@@ -14,5 +13,5 @@ env.SharedLibrary('daf_data',
                              "ReleaseProcess.cc",
                              "Security.cc",
                              "SupportFactory.cc"
-                            ]), LIBS=env.getlibs("boost jaula coral seal mysqlclient"))
+                            ]), LIBS=env.getlibs("boost") + basicLibs)
 
