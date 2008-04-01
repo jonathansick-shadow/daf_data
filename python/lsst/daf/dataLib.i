@@ -37,8 +37,7 @@ using namespace lsst::daf::data;
 %include "lsst/daf/base/Citizen.h"
 
 %import "lsst/daf/base/Persistable.h"
-%include "SupportFactory.i"
-%include "DataProperty.i"
+%include "supportFactoryLib.i"
 
 /******************************************************************************/
 // Local Variables: ***
