@@ -31,7 +31,7 @@ static char const* SVNid __attribute__((unused)) = "$Id$";
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 
-#include "lsst/daf/base/DataProperty.h"
+#include <lsst/daf/base/DataProperty.h>
 #include "lsst/daf/base/DateTime.h"
 #include "lsst/daf/persistence/FormatterImpl.h"
 #include "lsst/daf/persistence/LogicalLocation.h"

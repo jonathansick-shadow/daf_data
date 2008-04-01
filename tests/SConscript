@@ -6,19 +6,17 @@ env.Program(["lsstdata01.cc"], LIBS=env.libs["boost"] + basicLibs)
 
 env.CheckSwig("python", ilang="c++")
 env.Append(SWIGFLAGS=" -Ipython")
-exceptionTests = env.LoadableModuleIncomplete("_exceptionTests", "exceptionTests.i", LIBS=basicLibs)
 
 #
 # Tests
 #
 import lsst.tests
 
-tests = lsst.tests.Control(env, ignoreList=['exceptionTests.py'], verbose=True)
-
+tests = lsst.tests.Control(env, verbose = True)
 tests.run("lsstdata01.cc")
 
 for target in tests.run("*.py"):
     env.Depends(target, exceptionTests)
-    for mod in Split("utils data logging"):
+    for mod in Split("utils daf_base daf_data pex_logging"):
         env.Depends(target,
                     "../python/lsst/daf/data/_%s%s" % (mod, env['LDMODULESUFFIX']))
