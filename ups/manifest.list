@@ -2,6 +2,8 @@
 >merge: pex_exceptions
 >merge: pex_logging
 >merge: pex_policy
+>merge: daf_persistence
+>merge: security
 >merge: build
 >merge: core
 >merge: boost

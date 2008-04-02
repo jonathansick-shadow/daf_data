@@ -6,38 +6,37 @@ Access to the lsst::daf::data classes
 %enddef
 
 %feature("autodoc", "1");
-%module(docstring=dataLib_DOCSTRING) dataLib
+%module(package="lsst.daf.data", docstring=dataLib_DOCSTRING) dataLib
 
 %{
-#include "lsst/daf/base/Citizen.h"
+#include "lsst/daf/data/FitsFormatter.h"
+#include "lsst/daf/data/LsstBase.h"
+#include "lsst/daf/data/LsstData.h"
+#include "lsst/daf/data/LsstDataConfigurator.h"
+#include "lsst/daf/data/Provenance.h"
+#include "lsst/daf/data/ReleaseProcess.h"
+#include "lsst/daf/data/SupportFactory.h"
 %}
 
 %inline %{
 namespace lsst { namespace daf { namespace data { } } }
-namespace lsst { namespace daf { namespace utils { } } }
     
-using namespace lsst;
 using namespace lsst::daf::data;
 %}
 
 %init %{
 %}
 
-%include "p_lsstSwig.i"
-%template(vectorCitizen) std::vector<lsst::daf::base::Citizen *>;
-//
-// Swig 1.3.33 has problems with std::vector<Citizen const *>, so
-// we fake things here.  It's a fake, hence the C-style cast
-//
-%inline %{
-    std::vector<lsst::daf::base::Citizen *> * Citizen_census_for_swig() {
-        return (std::vector<lsst::daf::base::Citizen *> *)Citizen::census();
-    }
-%}
-%include "lsst/daf/base/Citizen.h"
+%include "lsst/p_lsstSwig.i"
 
-%import "lsst/daf/base/Persistable.h"
-%include "supportFactoryLib.i"
+%include "lsst/daf/data/FitsFormatter.h"
+%include "lsst/daf/data/LsstBase.h"
+%include "lsst/daf/data/LsstData.h"
+%include "lsst/daf/data/LsstDataConfigurator.h"
+%include "lsst/daf/data/Provenance.h"
+%include "lsst/daf/data/ReleaseProcess.h"
+%include "lsst/daf/data/SupportFactory.h"
+
 
 /******************************************************************************/
 // Local Variables: ***

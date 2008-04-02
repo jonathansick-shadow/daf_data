@@ -38,7 +38,7 @@
 #include "lsst/pex/policy/Policy.h"
 #include "lsst/daf/data/Provenance.h"
 #include "lsst/daf/data/ReleaseProcess.h"
-#include "lsst/daf/data/Security.h"
+#include "lsst/security/Security.h"
 
 namespace lsst {
 namespace daf {
@@ -112,7 +112,7 @@ public:
       * \brief   Accessor for an LsstData instance's Security
       * \return  see lsst::daf::data::Security
       */
-    virtual Security::PtrType getSecurity() const =0;
+    virtual lsst::security::Security::PtrType getSecurity() const =0;
 
 
     /**
@@ -144,7 +144,7 @@ public:
     /**
       * \brief   Store the given Security object in an LsstData instance
       */
-    virtual void setSecurity(Security::PtrType security) =0;
+    virtual void setSecurity(lsst::security::Security::PtrType security) =0;
  
     /**
       * \brief   Return a short string representation of an instance

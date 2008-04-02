@@ -47,7 +47,7 @@ LsstImpl_DC2::LsstImpl_DC2(const std::type_info & type) : lsst::daf::base::Citiz
     _policy = lsst::pex::policy::Policy::Ptr();
     _provenance = Provenance::PtrType();
     _releaseProcess = ReleaseProcess::PtrType();
-    _security = Security::PtrType();
+    _security = lsst::security::Security::PtrType();
     
     execTrace( boost::str( 
         boost::format( 
@@ -107,7 +107,7 @@ ReleaseProcess::PtrType LsstImpl_DC2::getReleaseProcess() const {
 }
 
 
-Security::PtrType LsstImpl_DC2::getSecurity() const {
+lsst::security::Security::PtrType LsstImpl_DC2::getSecurity() const {
     execTrace( "Enter LsstImpl_DC2::getSecurity()" );
     execTrace( "Exit LsstImpl_DC2::getSecurity()" );
 	return _security;
@@ -150,7 +150,7 @@ void LsstImpl_DC2::setReleaseProcess(ReleaseProcess::PtrType release) {
 }
 
 
-void LsstImpl_DC2::setSecurity(Security::PtrType security) {
+void LsstImpl_DC2::setSecurity(lsst::security::Security::PtrType security) {
     execTrace( "Enter LsstImpl_DC2::setSecurity()" );
     execTrace( "Exit LsstImpl_DC2::setSecurity()" );
 	_security = security;

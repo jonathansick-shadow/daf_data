@@ -1,13 +1,13 @@
 // -*- lsst-c++ -*-
 /**
-  * \class LsstImpl_DC2
+  * \class LsstImpl_DC3
   *
   * \ingroup daf
   *
-  * \brief The implementation of LsstImpl for DC2.
+  * \brief The implementation of LsstImpl for DC3.
   *        
   *        While publicly available, it is intended that LsstData realizations
-  *        will derive from LsstBase, and not LsstImpl_DC2. This indirection
+  *        will derive from LsstBase, and not LsstImpl_DC3. This indirection
   *        will isolate LsstData realizations from the exact base 
   *        implementation chosen for a given release of the framework.
   * 
@@ -25,8 +25,8 @@
   * 
   */
 
-#ifndef LSST_MWI_DATA_LSSTIMPL_DC2_H
-#define LSST_MWI_DATA_LSSTIMPL_DC2_H
+#ifndef LSST_MWI_DATA_LSSTIMPL_DC3_H
+#define LSST_MWI_DATA_LSSTIMPL_DC3_H
 
 #include <typeinfo>
 
@@ -38,11 +38,11 @@ namespace lsst {
 namespace daf {
 namespace data {
 
-class LsstImpl_DC2 : public LsstData, public lsst::daf::base::Citizen {
+class LsstImpl_DC3 : public LsstData, public lsst::daf::base::Citizen {
 public:
-    LsstImpl_DC2(const std::type_info & type);
+    LsstImpl_DC3(const std::type_info & type);
     /// Virtual destructor, class may be specialized (see Stroustrup 12.4.2)
-    virtual ~LsstImpl_DC2();
+    virtual ~LsstImpl_DC3();
 
     /**
       * \brief   Base implementation lsst::daf::base::DataProperty::daf::data:getChildren. 
@@ -189,5 +189,5 @@ private:
 } // namespace daf
 } // namespace lsst
 
-#endif // LSST_MWI_DATA_LSSTIMPL_DC2_H
+#endif // LSST_MWI_DATA_LSSTIMPL_DC3_H
 

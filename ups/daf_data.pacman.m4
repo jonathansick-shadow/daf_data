@@ -1,5 +1,5 @@
 #
-#   mwi 2.3
+#   daf_data 3.0
 #
 #
 m4_changequote([, ])m4_dnl

@@ -38,23 +38,13 @@
 #ifndef LSST_MWI_DATA_SUPPORTFACTORY_H
 #define LSST_MWI_DATA_SUPPORTFACTORY_H
 
-#include <string>
-
-#include <boost/any.hpp>
-
-#include "lsst/daf/base/DataProperty.h"
-
 namespace lsst {
 namespace daf {
 namespace data {
 
 class SupportFactory {
 public:
-    static lsst::daf::base::DataProperty::PtrType createLeafProperty(
-        std::string name,
-        boost::any value = boost::any()
-    );
-    static lsst::daf::base::DataProperty::PtrType createPropertyNode(std::string name);
+    static SupportFactory& the();
 
 private:
     SupportFactory();
@@ -62,7 +52,6 @@ private:
     SupportFactory& operator= (const SupportFactory&);
     ~SupportFactory();
     static SupportFactory* _singleton;
-    static SupportFactory& the();
 };
 
 
