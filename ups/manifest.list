@@ -5,7 +5,7 @@
 >merge: daf_persistence
 >merge: security
 >merge: build
->merge: core
+>merge: base
 >merge: boost
 >merge: swig
 >merge: doxygen
