@@ -1,3 +1,3 @@
 """Interface to lsst::daf::data classes.
 """
-from dataLib.i import *
+from dataLib import *
