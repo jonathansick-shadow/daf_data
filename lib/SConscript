@@ -3,10 +3,9 @@ Import('env')
 import os
 
 sourceFiles = ["../src/" + fn for fn in os.listdir("../src/") if fn.endswith(".cc")]
-lsstLibs = "daf_base daf_persistence pex_exceptions pex_logging pex_policy security".split()
 
 env.SharedLibrary(
     'daf_data',
     sourceFiles,
-    LIBS=env.getlibs("boost") + lsstLibs,
+    LIBS=env.getlibs("boost utils daf_base daf_persistence pex_exceptions pex_logging pex_policy security")
 )

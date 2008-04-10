@@ -2,5 +2,6 @@
 Import("env")
 
 env.CheckSwig("python", ilang="c++", includedProducts="utils")
-basicLibs = "daf_base daf_data pex_exceptions pex_logging pex_policy security".split()
-env.LoadableModuleIncomplete("_dataLib", Split("dataLib.i"), LIBS=env.libs["boost"] + basicLibs)
+env.LoadableModuleIncomplete("_dataLib", Split("dataLib.i"),
+                             LIBS=env.getlibs("boost utils daf_base daf_data pex_exceptions pex_logging pex_policy security")
+                             )
