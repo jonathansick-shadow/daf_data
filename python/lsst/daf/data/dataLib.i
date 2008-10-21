@@ -29,6 +29,54 @@ using namespace lsst::daf::data;
 
 %include "lsst/p_lsstSwig.i"
 
+%feature("shadow") lsst::daf::data::LsstData::getMetadata() const %{
+def getMetadata(*args):
+    x = $action(*args)
+    if x.get() is None:
+        return None
+    return x
+%}
+
+%feature("shadow") lsst::daf::data::LsstData::getPersistence() const %{
+def getPersistence(*args):
+    x = $action(*args)
+    if x.get() is None:
+        return None
+    return x
+%}
+
+%feature("shadow") lsst::daf::data::LsstData::getPolicy() const %{
+def getPolicy(*args):
+    x = $action(*args)
+    if x.get() is None:
+        return None
+    return x
+%}
+
+%feature("shadow") lsst::daf::data::LsstData::getProvenance() const %{
+def getProvenance(*args):
+    x = $action(*args)
+    if x.get() is None:
+        return None
+    return x
+%}
+
+%feature("shadow") lsst::daf::data::LsstData::getReleaseProcess() const %{
+def getReleaseProcess(*args):
+    x = $action(*args)
+    if x.get() is None:
+        return None
+    return x
+%}
+
+%feature("shadow") lsst::daf::data::LsstData::getSecurity() const %{
+def getSecurity(*args):
+    x = $action(*args)
+    if x.get() is None:
+        return None
+    return x
+%}
+
 %include "lsst/daf/data/FitsFormatter.h"
 %include "lsst/daf/data/LsstBase.h"
 %include "lsst/daf/data/LsstData.h"
