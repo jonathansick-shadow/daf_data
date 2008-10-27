@@ -78,8 +78,9 @@ def getSecurity(*args):
 %}
 
 %include "lsst/daf/data/FitsFormatter.h"
-%include "lsst/daf/data/LsstBase.h"
 %include "lsst/daf/data/LsstData.h"
+%include "lsst/daf/data/LsstImpl_DC3.h"
+%include "lsst/daf/data/LsstBase.h"
 %include "lsst/daf/data/LsstDataConfigurator.h"
 %include "lsst/daf/data/Provenance.h"
 %include "lsst/daf/data/ReleaseProcess.h"
