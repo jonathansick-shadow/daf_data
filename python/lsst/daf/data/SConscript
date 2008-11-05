@@ -1,7 +1,6 @@
 # -*- python -*-
 Import("env")
 
-env.CheckSwig("python", ilang="c++", includedProducts="utils")
+env.CheckSwig("python", ilang="c++", includedProducts="utils daf_base pex_policy daf_persistence")
 env.LoadableModuleIncomplete("_dataLib", Split("dataLib.i"),
-                             LIBS=env.getlibs("boost utils daf_base daf_data pex_exceptions pex_logging pex_policy security")
-                             )
+                             LIBS=env.getlibs("boost utils daf_base daf_data pex_exceptions pex_logging pex_policy security"))
