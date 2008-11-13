@@ -27,8 +27,18 @@ Access to the lsst::daf::data classes
 %import "lsst/daf/base/baseLib.i"
 %import "lsst/pex/policy/policyLib.i"
 %import "lsst/daf/persistence/persistenceLib.i"
+%import "lsst/security/securityLib.i"
 
 %lsst_exceptions();
+
+SWIG_SHARED_PTR(LsstData, lsst::daf::data::LsstData);
+SWIG_SHARED_PTR(Provenance, lsst::daf::data::Provenance);
+SWIG_SHARED_PTR(ReleaseProcess, lsst::daf::data::ReleaseProcess);
+SWIG_SHARED_PTR_DERIVED(LsstImpl_DC3, lsst::daf::data::LsstData, lsst::daf::data::LsstImpl_DC3);
+SWIG_SHARED_PTR_DERIVED(LsstBase, lsst::daf::data::LsstImpl_DC3, lsst::daf::data::LsstBase);
+
+%ignore lsst::daf::data::LsstData::getChildren;
+%ignore lsst::daf::data::LsstDC3_Impl::getChildren;
 
 %include "lsst/daf/data/FitsFormatter.h"
 %include "lsst/daf/data/Provenance.h"
