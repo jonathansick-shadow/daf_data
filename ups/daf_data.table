@@ -1,3 +1,9 @@
+setupRequired(boost)
+setupRequired(utils)
+setupRequired(pex_exceptions)
+setupRequired(pex_logging)
+setupRequired(pex_policy)
+setupRequired(daf_base)
 setupRequired(daf_persistence)
 setupRequired(security)
 
