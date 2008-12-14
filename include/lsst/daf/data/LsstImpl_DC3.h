@@ -45,17 +45,17 @@ public:
     virtual ~LsstImpl_DC3();
 
     /**
-      * \brief   Base implementation lsst::daf::base::DataProperty::daf::data:getChildren. 
+      * \brief   Base implementation of lsst::daf::data::LsstData.getChildren().
       *          May be overridden.
       *          Classes deriving from LsstImpl need implement a getChildren
       *          method only if they collect children.
       * \param   depth Specifies how deep to recurse the collection of
       *                children objects when creating the returned collection.
       *                see lsst::daf::data::LsstData.getChildren
-      * \return  ContainerType Will always return a pair of iterators giving a NULL range
+      * \return  Container Will always return a pair of iterators giving a NULL range
       *          (i.e. std::distance( first, last) = 0)  
       */
-    virtual LsstData::IteratorRangeType getChildren( unsigned depth = 1 );
+    virtual LsstData::IteratorRange getChildren( unsigned depth = 1 );
 
 
     /**
@@ -63,9 +63,9 @@ public:
       *          May be overridden. Base implementation returns a 
       *          reference-counted pointer to the base object's cached 
       *          instance of Metadata.
-      * \return  see lsst::daf::data::DataProperty
+      * \return  see lsst::daf::data::PropertySet
       */
-    virtual lsst::daf::base::DataProperty::PtrType getMetadata() const;
+    virtual lsst::daf::base::PropertySet::Ptr getMetadata() const;
 
     /**
       * \brief   Base implementation of lsst::daf::data::LsstData.getPersistence().
@@ -92,7 +92,7 @@ public:
       *          instance of Provenance.
       * \return  see lsst::daf::data::Provenance
       */
-    virtual Provenance::PtrType getProvenance() const;
+    virtual Provenance::Ptr getProvenance() const;
 
     /**
       * \brief   Base implementation of lsst::daf::data::LsstData.getReleaseProcess().
@@ -101,7 +101,7 @@ public:
       *          instance of ReleaseProcess.
       * \return  see lsst::daf::data::ReleaseProcess
       */
-    virtual ReleaseProcess::PtrType getReleaseProcess() const;
+    virtual ReleaseProcess::Ptr getReleaseProcess() const;
 
     /**
       * \brief   Base implementation of lsst::daf::data::LsstData.getSecurity().
@@ -119,7 +119,7 @@ public:
       *          the destruction of the currently-cached member object since
       *          the data member is a reference-counted pointer.
       */
-    virtual void setMetadata(lsst::daf::base::DataProperty::PtrType metadata);
+    virtual void setMetadata(lsst::daf::base::PropertySet::Ptr metadata);
 
     /**
       * \brief   Base implementation of lsst::daf::data::setPersistence(). 
@@ -147,7 +147,7 @@ public:
       *          the destruction of the currently-cached member object since
       *          the data member is a reference-counted pointer.
       */
-    virtual void setProvenance(Provenance::PtrType provenance);
+    virtual void setProvenance(Provenance::Ptr provenance);
 
     /**
       * \brief   Base implementation of lsst::daf::data::setReleaseProcess(). 
@@ -156,7 +156,7 @@ public:
       *          the destruction of the currently-cached member object since
       *          the data member is a reference-counted pointer.
       */
-    virtual void setReleaseProcess(ReleaseProcess::PtrType release);
+    virtual void setReleaseProcess(ReleaseProcess::Ptr release);
 
     /**
       * \brief   Base implementation of lsst::daf::data::setSecurity(). 
@@ -175,13 +175,13 @@ public:
     virtual std::string toString();
 
 private:
-    lsst::daf::base::DataProperty::PtrType _metadata;
+    lsst::daf::base::PropertySet::Ptr _metadata;
     lsst::daf::persistence::Persistence::Ptr _persistence;
     lsst::pex::policy::Policy::Ptr _policy;
-    Provenance::PtrType _provenance;
-    ReleaseProcess::PtrType _releaseProcess;
+    Provenance::Ptr _provenance;
+    ReleaseProcess::Ptr _releaseProcess;
     lsst::security::Security::PtrType _security;
-    LsstData::ContainerType _children;
+    LsstData::Container _children;
 
 };
 

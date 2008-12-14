@@ -65,7 +65,7 @@ LsstDataConfigurator::LsstDataConfigurator& LsstDataConfigurator::operator= (con
 
 
 void LsstDataConfigurator::configureSupport(
-    LsstData::PtrType data,
+    LsstData::Ptr data,
     lsst::pex::policy::Policy::Ptr policy
 ){
     execTrace( 

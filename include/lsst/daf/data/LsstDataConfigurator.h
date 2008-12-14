@@ -50,7 +50,7 @@ public:
       * \param   policy The controlling policy object
       */
     static void configureSupport(
-        LsstData::PtrType data,
+        LsstData::Ptr data,
         lsst::pex::policy::Policy::Ptr policy
     );
 private:
