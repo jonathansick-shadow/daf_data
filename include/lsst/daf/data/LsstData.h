@@ -33,7 +33,7 @@
 #include <list>
 #include <string>
 
-#include "lsst/daf/base/DataProperty.h"
+#include "lsst/daf/base/PropertySet.h"
 #include "lsst/daf/persistence/Persistence.h"
 #include "lsst/pex/policy/Policy.h"
 #include "lsst/daf/data/Provenance.h"
@@ -47,13 +47,13 @@ namespace data {
 class LsstData {
 public:
     /// Reference-counted pointer typedef for LsstData instances
-    typedef boost::shared_ptr<LsstData> PtrType;
+    typedef boost::shared_ptr<LsstData> Ptr;
     /// The returned child collection type for all LsstData realizations
-    typedef std::list<PtrType> ContainerType;
+    typedef std::list<Ptr> Container;
     /// The child collection iterator type for all LsstData realizations
-    typedef std::list<PtrType>::const_iterator ContainerIteratorType;
+    typedef std::list<Ptr>::const_iterator ContainerIterator;
     /// The child collection iterator begin/end pair
-    typedef std::pair< ContainerIteratorType, ContainerIteratorType > IteratorRangeType;
+    typedef std::pair< ContainerIterator, ContainerIterator > IteratorRange;
     
     /// Virtual destructor, pure virtual base class (see Stroustrup 12.4.2)
     virtual ~LsstData() {};
@@ -61,7 +61,7 @@ public:
     /**
       * \brief All classes implementing this interface will return iterator access to 
       *        a collection of references to its children (if any), as
-      *        LsstData::PtrType.
+      *        LsstData::Ptr.
       * \param depth How deep below the current object to go in gathering the
       *              list of children.
       *              1 = this object only
@@ -69,19 +69,19 @@ public:
       *              ...
       *              UINT_MAX = completely recurse all children of this object
       *                  (see limits.h)
-      * \return An IteratorRangeType, a pair of iterators giving begin() and end()
+      * \return An IteratorRange, a pair of iterators giving begin() and end()
       *         to allow the caller to iterate over the collection of children.
       * \note If the specific LsstData realization does not aggregate children, the 
       *       returned iterator range will be 0. This can be tested on the return value
       *       with a call to std::distance( range.first, range.second ).
       */
-    virtual IteratorRangeType getChildren( unsigned depth = 1 ) = 0;
+    virtual IteratorRange getChildren( unsigned depth = 1 ) = 0;
 
     /**
       * \brief   Accessor for object's Metadata
-      * \return  see lsst::daf::data::DataProperty
+      * \return  see lsst::daf::data::PropertySet
       */
-    virtual lsst::daf::base::DataProperty::PtrType getMetadata() const =0;
+    virtual lsst::daf::base::PropertySet::Ptr getMetadata() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's Persistence
@@ -100,13 +100,13 @@ public:
       * \brief   Accessor for an LsstData instance's Provenance
       * \return  see lsst::daf::data::Provenance
       */
-    virtual Provenance::PtrType getProvenance() const =0;
+    virtual Provenance::Ptr getProvenance() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's ReleaseProcess
       * \return  see lsst::daf::data::ReleaseProcess
       */
-    virtual ReleaseProcess::PtrType getReleaseProcess() const =0;
+    virtual ReleaseProcess::Ptr getReleaseProcess() const =0;
 
     /**
       * \brief   Accessor for an LsstData instance's Security
@@ -118,7 +118,7 @@ public:
     /**
       * \brief   Store the given Metadata object in an LsstData instance
       */
-    virtual void setMetadata(lsst::daf::base::DataProperty::PtrType metadata) =0;
+    virtual void setMetadata(lsst::daf::base::PropertySet::Ptr metadata) =0;
 
     /**
       * \brief   Store the given Persistence object in an LsstData instance
@@ -134,12 +134,12 @@ public:
     /**
       * \brief   Store the given Provenance object in an LsstData instance
       */
-    virtual void setProvenance(Provenance::PtrType provenance) =0;
+    virtual void setProvenance(Provenance::Ptr provenance) =0;
 
     /**
       * \brief   Store the given ReleaseProcess object in an LsstData instance
       */
-    virtual void setReleaseProcess(ReleaseProcess::PtrType release) =0;
+    virtual void setReleaseProcess(ReleaseProcess::Ptr release) =0;
 
     /**
       * \brief   Store the given Security object in an LsstData instance

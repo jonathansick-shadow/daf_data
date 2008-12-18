@@ -17,10 +17,12 @@
 #include <iostream>
 
 #include "lsst/daf/base/Citizen.h"
-#include "lsst/daf/base/DataProperty.h"
+#include "lsst/daf/base/PropertySet.h"
 #include "lsst/daf/data/LsstImpl_DC3.h"
 #include "lsst/pex/logging/Trace.h"
 #include <lsst/pex/policy/Policy.h>
+
+namespace dafBase = lsst::daf::base;
 
 using namespace std;
 
@@ -29,8 +31,6 @@ using namespace std;
 static void execTrace( string s, int level = EXEC_TRACE ){
     lsst::pex::logging::Trace( "daf.data.LsstImpl", level, s );
 }
-
-using lsst::daf::base::DataProperty;
 
 namespace lsst {
 namespace daf {
@@ -41,11 +41,11 @@ LsstImpl_DC3::LsstImpl_DC3(const std::type_info & type) : lsst::daf::base::Citiz
     execTrace( boost::str( 
         boost::format(
             "Enter LsstImpl_DC3::LsstImpl_DC3(%s)") % type.name()));
-    _metadata = DataProperty::PtrType();
+    _metadata = dafBase::PropertySet::Ptr();
     _persistence = lsst::daf::persistence::Persistence::Ptr();
     _policy = lsst::pex::policy::Policy::Ptr();
-    _provenance = Provenance::PtrType();
-    _releaseProcess = ReleaseProcess::PtrType();
+    _provenance = Provenance::Ptr();
+    _releaseProcess = ReleaseProcess::Ptr();
     _security = lsst::security::Security::PtrType();
     
     execTrace( boost::str( 
@@ -62,16 +62,16 @@ LsstImpl_DC3:: ~LsstImpl_DC3(){
 }
 
 
-LsstData::IteratorRangeType LsstImpl_DC3::getChildren( unsigned depth ) {
+LsstData::IteratorRange LsstImpl_DC3::getChildren( unsigned depth ) {
     execTrace( boost::str( 
         boost::format(
             "Enter LsstImpl_DC3::getChildren(%d)") % depth ));
     execTrace( "Exit LsstImpl_DC3::getChildren()" );
-	return LsstData::IteratorRangeType( _children.begin(), _children.end() );
+	return LsstData::IteratorRange( _children.begin(), _children.end() );
 }
 
 
-DataProperty::PtrType LsstImpl_DC3::getMetadata() const{
+dafBase::PropertySet::Ptr LsstImpl_DC3::getMetadata() const{
     execTrace( "Enter LsstImpl_DC3::getMetadata()" );
     execTrace( "Exit LsstImpl_DC3::getMetadata()" );
 	return _metadata;
@@ -92,14 +92,14 @@ lsst::pex::policy::Policy::Ptr LsstImpl_DC3::getPolicy() const{
 }
 
 
-Provenance::PtrType LsstImpl_DC3::getProvenance() const {
+Provenance::Ptr LsstImpl_DC3::getProvenance() const {
     execTrace( "Enter LsstImpl_DC3::getProvenance()" );
     execTrace( "Exit LsstImpl_DC3::getProvenance()" );
 	return _provenance;
 }
 
 
-ReleaseProcess::PtrType LsstImpl_DC3::getReleaseProcess() const {
+ReleaseProcess::Ptr LsstImpl_DC3::getReleaseProcess() const {
     execTrace( "Enter LsstImpl_DC3::getReleaseProcess()" );
     execTrace( "Exit LsstImpl_DC3::getReleaseProcess()" );
 	return _releaseProcess;
@@ -113,7 +113,7 @@ lsst::security::Security::PtrType LsstImpl_DC3::getSecurity() const {
 }
 
 
-void LsstImpl_DC3::setMetadata(DataProperty::PtrType metadata) {
+void LsstImpl_DC3::setMetadata(dafBase::PropertySet::Ptr metadata) {
     execTrace( "Enter LsstImpl_DC3::setMetadata()" );
     execTrace( "Exit LsstImpl_DC3::setMetadata()" );
 	_metadata = metadata;
@@ -135,14 +135,14 @@ void LsstImpl_DC3::setPolicy(lsst::pex::policy::Policy::Ptr policy) {
 }
 
 
-void LsstImpl_DC3::setProvenance(Provenance::PtrType provenance) {
+void LsstImpl_DC3::setProvenance(Provenance::Ptr provenance) {
     execTrace( "Enter LsstImpl_DC3::setProvenance()" );
     execTrace( "Exit LsstImpl_DC3::setProvenance()" );
 	_provenance = provenance;
 }
 
 
-void LsstImpl_DC3::setReleaseProcess(ReleaseProcess::PtrType release) {
+void LsstImpl_DC3::setReleaseProcess(ReleaseProcess::Ptr release) {
     execTrace( "Enter LsstImpl_DC3::setReleaseProcess()" );
     execTrace( "Exit LsstImpl_DC3::setReleaseProcess()" );
 	_releaseProcess = release;

@@ -13,7 +13,6 @@ Access to the lsst::daf::data classes
 #include "lsst/pex/policy/Policy.h"
 #include "lsst/pex/policy/PolicyFile.h"
 #include "lsst/daf/persistence.h"
-#include "lsst/daf/data/FitsFormatter.h"
 #include "lsst/daf/data/LsstBase.h"
 #include "lsst/daf/data/LsstData.h"
 #include "lsst/daf/data/LsstDataConfigurator.h"
@@ -40,7 +39,6 @@ SWIG_SHARED_PTR_DERIVED(LsstBase, lsst::daf::data::LsstImpl_DC3, lsst::daf::data
 %ignore lsst::daf::data::LsstData::getChildren;
 %ignore lsst::daf::data::LsstDC3_Impl::getChildren;
 
-%include "lsst/daf/data/FitsFormatter.h"
 %include "lsst/daf/data/Provenance.h"
 %include "lsst/daf/data/ReleaseProcess.h"
 %include "lsst/daf/data/LsstData.h"

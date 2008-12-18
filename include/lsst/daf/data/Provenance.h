@@ -45,7 +45,7 @@ public:
     virtual ~Provenance();
 
     /// Reference-counted pointer typedef forinstances of this class
-    typedef boost::shared_ptr<Provenance> PtrType;
+    typedef boost::shared_ptr<Provenance> Ptr;
     
     /// A short string representation of an instance
     std::string toString();

@@ -121,7 +121,7 @@ using lsst::pex::logging::Trace;
 class MyLsst : public LsstBase
 {
 public:
-    typedef boost::shared_ptr<MyLsst> PtrType;
+    typedef boost::shared_ptr<MyLsst> Ptr;
     MyLsst(string s);
     virtual ~MyLsst();
 };
@@ -168,7 +168,7 @@ int main( int argc, char** argv )
         // Configure the instance via a given Policy object
         //
         Trace("lsstdata01", 1, "Creating an LsstData realization");
-        MyLsst::PtrType x = MyLsst::PtrType(new MyLsst( "An LsstData realization" ));
+        MyLsst::Ptr x = MyLsst::Ptr(new MyLsst( "An LsstData realization" ));
         Trace("lsstdata01", 1, 
             boost::format("Done: Created MyLsst object '%s'") % x->toString());
 
@@ -182,7 +182,7 @@ int main( int argc, char** argv )
         // methods on the base object
         //
         
-        LsstData::IteratorRangeType range = x->getChildren();
+        LsstData::IteratorRange range = x->getChildren();
         if( std::distance( range.first, range.second) != 0 ) {
             Trace("lsstdata01", 1,
                 "Error: MyLsst object is a simple object and does not " \

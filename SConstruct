@@ -2,39 +2,40 @@
 #
 # Setup our environment
 #
-import glob, os.path, re, os
+import glob, os.path, re
 import lsst.SConsUtils as scons
+
+dependencies = "boost python utils daf_base pex_logging pex_exceptions pex_policy daf_persistence security".split()
 
 env = scons.makeEnv("daf_data",
                     r"$HeadURL$",
                     [["boost", "boost/version.hpp", "boost_system:C++"],
                      ["boost", "boost/version.hpp", "boost_filesystem:C++"],
                      ["boost", "boost/regex.hpp", "boost_regex:C++"],
-                     ["boost", "boost/system/config.hpp", "boost_system:C++"],
-                     ["boost", "boost/thread.hpp", "boost_thread:C++"],
                      ["python", "Python.h"],
-		     ["utils", "lsst/utils/Demangle.h", "utils:C++"],
+                     ["utils", "lsst/tr1/unordered_map.h"],
                      ["daf_base", "lsst/daf/base.h", "daf_base:C++"],
+                     ["pex_logging", "lsst/pex/logging/Trace.h", "pex_logging:C++"],
+                     ["pex_exceptions", "lsst/pex/exceptions.h", "pex_exceptions:C++"],
                      ["pex_policy", "lsst/pex/policy/Policy.h", "pex_policy:C++"],
                      ["daf_persistence", "lsst/daf/persistence.h", "daf_persistence:C++"],
-                     ["pex_exceptions", "lsst/pex/exceptions.h", "pex_exceptions:C++"],
-                     ["pex_logging", "lsst/pex/logging/Trace.h", "pex_logging:C++"],
                      ["security", "lsst/security/Security.h", "security:C++"],
-                    ])
 
-#
-# Is C++'s TR1 available?  If not, use e.g. #include "lsst/tr1/foo.h"
-#
-# This test is in SConsUtils >= 1.17, so when a suitable version is deployed we can delete the test from here
-#
-if not re.search(r"LSST_HAVE_TR1", str(env['CCFLAGS'])):
-    conf = env.Configure()
-    env.Append(CCFLAGS = '-DLSST_HAVE_TR1=%d' % int(conf.CheckHeader("tr1/unordered_map", language="C++")))
-    conf.Finish()
+                    ])
+env.Help("""
+LSST Data Access Framework data package
+""")
+
+###############################################################################
+# Boilerplate below here
+
+pkg = env["eups_product"]
+env.libs[pkg] += env.getlibs(" ".join(dependencies))
+
 #
 # Build/install things
 #
-for d in Split("lib tests python/lsst/daf/data doc"):
+for d in Split("lib python/lsst/" + re.sub(r'_', "/", pkg) + " examples tests doc"):
     SConscript(os.path.join(d, "SConscript"))
 
 env['IgnoreFiles'] = r"(~$|\.pyc$|^\.svn$|\.o$)"
@@ -56,7 +57,3 @@ if files:
     env.Command("TAGS", files, "etags -o $TARGET $SOURCES")
 
 env.Declare()
-env.Help("""
-LSST Data Access Framework Data package
-""")
-

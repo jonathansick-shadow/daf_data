@@ -43,7 +43,7 @@ public:
     virtual ~ReleaseProcess();
 
     /// Reference-counted pointer typedef forinstances of this class
-    typedef boost::shared_ptr<ReleaseProcess> PtrType;
+    typedef boost::shared_ptr<ReleaseProcess> Ptr;
     
     /// A short string representation of an instance
     std::string toString();
