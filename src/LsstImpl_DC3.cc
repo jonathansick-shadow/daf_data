@@ -26,10 +26,12 @@ namespace dafBase = lsst::daf::base;
 
 using namespace std;
 
-
+namespace {
+    char const* TRACE_NAME = "daf.data.LsstImpl";
+}
 #define EXEC_TRACE  20
 static void execTrace( string s, int level = EXEC_TRACE ){
-    lsst::pex::logging::Trace( "daf.data.LsstImpl", level, s );
+    lsst::pex::logging::Trace(TRACE_NAME, level, s );
 }
 
 namespace lsst {
@@ -72,9 +74,8 @@ LsstData::IteratorRange LsstImpl_DC3::getChildren( unsigned depth ) {
 
 
 dafBase::PropertySet::Ptr LsstImpl_DC3::getMetadata() const{
-    execTrace( "Enter LsstImpl_DC3::getMetadata()" );
-    execTrace( "Exit LsstImpl_DC3::getMetadata()" );
-	return _metadata;
+    lsst::pex::logging::TTrace<5>(TRACE_NAME, (boost::format("LsstImpl_DC3::getMetadata(): %p") % _metadata).str());
+    return _metadata;
 }
 
 
@@ -114,9 +115,9 @@ lsst::security::Security::PtrType LsstImpl_DC3::getSecurity() const {
 
 
 void LsstImpl_DC3::setMetadata(dafBase::PropertySet::Ptr metadata) {
-    execTrace( "Enter LsstImpl_DC3::setMetadata()" );
-    execTrace( "Exit LsstImpl_DC3::setMetadata()" );
-	_metadata = metadata;
+    lsst::pex::logging::TTrace<5>(TRACE_NAME,
+                                  (boost::format("LsstImpl_DC3::setMetadata(): %p -> %p") % _metadata % metadata).str());
+    _metadata = metadata;
 }
 
 
