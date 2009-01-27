@@ -38,9 +38,7 @@ namespace lsst {
 namespace daf {
 namespace data {
 
-namespace dafBase = lsst::daf::base;
-
-class LsstImpl_DC3 : public LsstData, public dafBase::Citizen {
+class LsstImpl_DC3 : public LsstData, public lsst::daf::base::Citizen {
 public:
     LsstImpl_DC3(const std::type_info & type);
     /// Virtual destructor, class may be specialized (see Stroustrup 12.4.2)
@@ -67,7 +65,7 @@ public:
       *          instance of Metadata.
       * \return  see lsst::daf::data::PropertySet
       */
-    virtual dafBase::PropertySet::Ptr getMetadata() const;
+    virtual lsst::daf::base::PropertySet::Ptr getMetadata() const;
 
     /**
       * \brief   Base implementation of lsst::daf::data::LsstData.getPersistence().
@@ -121,7 +119,7 @@ public:
       *          the destruction of the currently-cached member object since
       *          the data member is a reference-counted pointer.
       */
-    virtual void setMetadata(dafBase::PropertySet::Ptr metadata);
+    virtual void setMetadata(lsst::daf::base::PropertySet::Ptr metadata);
 
     /**
       * \brief   Base implementation of lsst::daf::data::setPersistence(). 
@@ -177,7 +175,7 @@ public:
     virtual std::string toString();
 
 private:
-    dafBase::PropertySet::Ptr _metadata;
+    lsst::daf::base::PropertySet::Ptr _metadata;
     lsst::daf::persistence::Persistence::Ptr _persistence;
     lsst::pex::policy::Policy::Ptr _policy;
     Provenance::Ptr _provenance;

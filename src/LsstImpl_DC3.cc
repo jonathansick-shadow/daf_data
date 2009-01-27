@@ -113,7 +113,7 @@ lsst::security::Security::PtrType LsstImpl_DC3::getSecurity() const {
 }
 
 
-void LsstImpl_DC3::setMetadata(dafBase::PropertySet::Ptr metadata) {
+void LsstImpl_DC3::setMetadata(lsst::daf::base::PropertySet::Ptr metadata) {
     execTrace( "Enter LsstImpl_DC3::setMetadata()" );
     execTrace( "Exit LsstImpl_DC3::setMetadata()" );
 	_metadata = metadata;
