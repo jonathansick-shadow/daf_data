@@ -33,6 +33,7 @@ Access to the lsst::daf::data classes
 SWIG_SHARED_PTR(LsstData, lsst::daf::data::LsstData);
 SWIG_SHARED_PTR(Provenance, lsst::daf::data::Provenance);
 SWIG_SHARED_PTR(ReleaseProcess, lsst::daf::data::ReleaseProcess);
+SWIG_SHARED_PTR_DERIVED(LsstImpl_DC3, lsst::daf::base::Citizen, lsst::daf::data::LsstImpl_DC3);
 SWIG_SHARED_PTR_DERIVED(LsstImpl_DC3, lsst::daf::data::LsstData, lsst::daf::data::LsstImpl_DC3);
 SWIG_SHARED_PTR_DERIVED(LsstBase, lsst::daf::data::LsstImpl_DC3, lsst::daf::data::LsstBase);
 
