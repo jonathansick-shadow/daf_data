@@ -82,7 +82,7 @@ LsstDataConfigurator::LsstDataConfigurator(const LsstDataConfigurator&){
 }
 
 
-LsstDataConfigurator::LsstDataConfigurator& LsstDataConfigurator::operator= (const LsstDataConfigurator&){
+LsstDataConfigurator& LsstDataConfigurator::operator= (const LsstDataConfigurator&){
 	return the();
 }
 

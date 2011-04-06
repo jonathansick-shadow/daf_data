@@ -69,7 +69,7 @@ ReleaseProcess::ReleaseProcess(const ReleaseProcess& from) : lsst::daf::base::Ci
 }
 
 
-ReleaseProcess::ReleaseProcess& ReleaseProcess::operator= (const ReleaseProcess&){
+ReleaseProcess& ReleaseProcess::operator= (const ReleaseProcess&){
     execTrace("ReleaseProcess::operator= (const ReleaseProcess&)");
     return *this;
 }

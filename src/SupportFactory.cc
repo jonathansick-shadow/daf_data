@@ -81,7 +81,7 @@ SupportFactory::SupportFactory(const SupportFactory&){
 }
 
 
-SupportFactory::SupportFactory& SupportFactory::operator= (const SupportFactory&){
+SupportFactory& SupportFactory::operator= (const SupportFactory&){
     return the();
 }
 

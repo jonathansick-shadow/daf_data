@@ -70,7 +70,7 @@ Provenance::Provenance(const Provenance& from) : lsst::daf::base::Citizen( typei
 }
 
 
-Provenance::Provenance& Provenance::operator= (const Provenance&){
+Provenance& Provenance::operator= (const Provenance&){
     execTrace("Provenance::operator= (const Provenance&)");
     return *this;
 }
