@@ -26,11 +26,6 @@
 // LsstImpl_DC3.cc
 // Implementation of class LsstImpl_DC3 methods
 //
-// $Author::                                                                 $
-// $Rev::                                                                    $
-// $Date::                                                                   $
-// $Id::                                                                     $
-// 
 // Contact: Jeff Bartels (jeffbartels@usa.net)
 // 
 // Created: 03-Apr-2007 5:30:00 PM

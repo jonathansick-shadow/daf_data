@@ -26,11 +26,6 @@
 // Provenance.cc
 // Implementation of class Provenance methods
 //
-// $Author::                                                                 $
-// $Rev::                                                                    $
-// $Date::                                                                   $
-// $Id::                                                                     $
-// 
 // Contact: Jeff Bartels (jeffbartels@usa.net)
 // 
 // Created: 03-Apr-2007 5:30:00 PM
