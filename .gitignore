@@ -1,0 +1,32 @@
+
+# /
+/.scon*
+/._SConstruct
+/.gdb_history
+/config.log
+
+# /doc/
+/doc/htmlDir
+
+# /lib/
+/lib/*.so
+/lib/*.dylib
+/lib/._SConscript
+
+# /python/lsst/daf/data/
+/python/lsst/daf/data/dataLib.py
+/python/lsst/daf/data/dataLib_wrap.*
+/python/lsst/daf/data/*.pyc
+
+# /src/
+/src/*.os
+/src/.gdb_history
+
+# /tests/
+/tests/*.os
+/tests/*.so
+/tests/*.pyc
+/tests/.gdb_history
+/tests/._SConscript
+/tests/.tests
+/tests/lsstdata01
